@@ -34,7 +34,7 @@ LUCI_PKGARCH:=all
 LUCI_DEPENDS:= \
 	+coreutils +coreutils-base64 +dns2socks +dns2tcp +dnsmasq-full +@PACKAGE_dnsmasq_full_ipset +ipset +kmod-ipt-nat \
 	+ip-full +iptables +iptables-mod-tproxy +lua +lua-neturl +libuci-lua +microsocks \
-	+tcping +resolveip +shadowsocksr-libev-ssr-check +uclient-fetch +jshn  +wget-ssl +lua +luasocket +privoxy +lua-maxminddb +lua-cjson  +wget +curl  \
+	+tcping +resolveip  +uclient-fetch +jshn  +wget-ssl +lua +luasocket +privoxy +lua-maxminddb +lua-cjson  +wget +curl  \
 	+PACKAGE_$(PKG_NAME)_INCLUDE_libustream-mbedtls:libustream-mbedtls \
 	+PACKAGE_$(PKG_NAME)_INCLUDE_libustream-openssl:libustream-openssl \
 	+PACKAGE_$(PKG_NAME)_INCLUDE_libustream-wolfssl:libustream-wolfssl \
@@ -187,11 +187,11 @@ config PACKAGE_$(PKG_NAME)_INCLUDE_Shadowsocks_V2ray_Plugin
 
 config PACKAGE_$(PKG_NAME)_INCLUDE_ShadowsocksR_Libev_Client
 	bool "Include ShadowsocksR Libev Client"
-	default y
+	default n
 
 config PACKAGE_$(PKG_NAME)_INCLUDE_ShadowsocksR_Libev_Server
 	bool "Include ShadowsocksR Libev Server"
-	default y if i386||x86_64||arm
+	default n if i386||x86_64||arm
 
 config PACKAGE_$(PKG_NAME)_INCLUDE_Trojan
 	bool "Include Trojan"

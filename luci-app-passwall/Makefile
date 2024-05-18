@@ -83,12 +83,12 @@ config PACKAGE_$(PKG_NAME)_INCLUDE_Shadowsocks_Libev_Client
 	bool "Include Shadowsocks Libev Client"
 	select PACKAGE_shadowsocks-libev-ss-local
 	select PACKAGE_shadowsocks-libev-ss-redir
-	default y
+	default n
 
 config PACKAGE_$(PKG_NAME)_INCLUDE_Shadowsocks_Libev_Server
 	bool "Include Shadowsocks Libev Server"
 	select PACKAGE_shadowsocks-libev-ss-server
-	default y if aarch64||arm||i386||x86_64
+	default n if aarch64||arm||i386||x86_64
 
 config PACKAGE_$(PKG_NAME)_INCLUDE_Shadowsocks_Rust_Client
 	bool "Include Shadowsocks Rust Client"
@@ -106,7 +106,7 @@ config PACKAGE_$(PKG_NAME)_INCLUDE_ShadowsocksR_Libev_Client
 	bool "Include ShadowsocksR Libev Client"
 	select PACKAGE_shadowsocksr-libev-ssr-local
 	select PACKAGE_shadowsocksr-libev-ssr-redir
-	default y
+	default n
 
 config PACKAGE_$(PKG_NAME)_INCLUDE_ShadowsocksR_Libev_Server
 	bool "Include ShadowsocksR Libev Server"
