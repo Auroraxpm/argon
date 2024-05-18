@@ -179,7 +179,7 @@ config PACKAGE_$(PKG_NAME)_INCLUDE_Redsocks2
 
 config PACKAGE_$(PKG_NAME)_INCLUDE_Shadowsocks_Simple_Obfs
 	bool "Include Shadowsocks Simple Obfs Plugin"
-	default y
+	default n
 
 config PACKAGE_$(PKG_NAME)_INCLUDE_Shadowsocks_V2ray_Plugin
 	bool "Include Shadowsocks V2ray Plugin"
