@@ -849,9 +849,14 @@
  	padding: 0;
  }
 
- .main>.main-left>.nav>.slide>.menu,
- .main>.main-left>.nav>li>[data-title="Logout"],
+.main>.main-left>.nav>.slide>.menu,
+ .main>.main-left>.nav>li>[data-title="退出"],
  .main>.main-left>.nav>li>[data-title="iStore"],
+.main>.main-left>.nav>li>[data-title="网络向导"],
+.main>.main-left>.nav>li>[data-title="首页"],
+.main>.main-left>.nav>li>[data-title="NetworkGuide"],
+.main>.main-left>.nav>li>[data-title="QuickStart"],
+.main>.main-left>.nav>li>[data-title="Log out"],
  .main>.main-left>.nav>li>[data-title="Dashboard"] {
  	font-size: 1rem;
  	font-weight: 500;
@@ -966,6 +971,29 @@
  	background: url(./icon/sidebar-icon/istore.svg) no-repeat;
  	background-size: 25px;
  }
+.main > .main-left > .nav > li > a[data-title="退出"]:before {
+position: absolute;
+ 	right: 14px;
+ 	width: 32px;
+ 	height: 25px;
+ 	content: "";
+ 	background: url(./icon/logout.svg) no-repeat;
+ 	background-size: 25px;
+
+}
+
+
+.main > .main-left > .nav > li > a[data-title="Log out"]:before {
+position: absolute;
+ 	right: 14px;
+ 	width: 32px;
+ 	height: 25px;
+ 	content: "";
+ 	background: url(./icon/logout.svg) no-repeat;
+ 	background-size: 25px;
+
+}
+
 
  /* End Sidebar */
 
