@@ -37,6 +37,7 @@ function index()
 	entry({"admin", "services", appname, "acl"}, cbi(appname .. "/client/acl"), _("Access control"), 98).leaf = true
 	entry({"admin", "services", appname, "acl_config"}, cbi(appname .. "/client/acl_config")).leaf = true
 	entry({"admin", "services", appname, "log"}, form(appname .. "/client/log"), _("Watch Logs"), 999).leaf = true
+        entry({"admin", "services", appname, "ip"}, call("check_ip")).leaf = true
 
 	--[[ Server ]]
 	entry({"admin", "services", appname, "server"}, cbi(appname .. "/server/index"), _("Server-Side"), 99).leaf = true
@@ -62,6 +63,7 @@ function index()
 	entry({"admin", "services", appname, "ping_node"}, call("ping_node")).leaf = true
 	entry({"admin", "services", appname, "urltest_node"}, call("urltest_node")).leaf = true
 	entry({"admin", "services", appname, "set_node"}, call("set_node")).leaf = true
+        
 	entry({"admin", "services", appname, "copy_node"}, call("copy_node")).leaf = true
 	entry({"admin", "services", appname, "clear_all_nodes"}, call("clear_all_nodes")).leaf = true
 	entry({"admin", "services", appname, "delete_select_nodes"}, call("delete_select_nodes")).leaf = true
@@ -410,6 +412,61 @@ function com_update(comname)
 	end
 
 	http_write_json(json)
+
+end
+function get_iso(ip)
+    local mm = require 'maxminddb'
+    local db = mm.open('/usr/share/passwall2/GeoLite2-Country.mmdb')
+    local res = db:lookup(ip)
+    return string.lower(res:get('country', 'iso_code'))
+end
+
+function get_cname(ip)
+    local mm = require 'maxminddb'
+    local db = mm.open('/usr/share/passwall2/GeoLite2-Country.mmdb')
+    local res = db:lookup(ip)
+    return string.lower(res:get('country', 'names', 'zh-CN'))
+end
+
+function check_site(host, port)
+    local nixio = require "nixio"
+    local socket = nixio.socket("inet", "stream")
+    socket:setopt("socket", "rcvtimeo", 2)
+    socket:setopt("socket", "sndtimeo", 2)
+    local ret = socket:connect(host, port)
+    socket:close()
+    return ret
+end
+
+
+-- 获取当前代理状态 与节点ip
+function check_ip()
+    local e = {}
+    local d = {}
+    local port = 80
+    local ip = luci.sys.exec('curl --retry 3 -m 10 -LfsA "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.183 Safari/537.36" http://api.ipify.org/')
+    d.flag = 'un'
+    d.country = 'Unknown'
+    if (ip ~= '') then
+        local status, code = pcall(get_iso, ip)
+        if (status) then
+            d.flag = code
+        end
+        local status1, country = pcall(get_cname, ip)
+        if (status1) then
+            d.country = country
+        end
+    end
+    e.outboard = ip
+    e.outboardip = d
+    e.baidu = check_site('www.baidu.com', port)
+    e.taobao = check_site('www.taobao.com', port)
+    e.google = check_site('www.google.com', port)
+    e.youtube = check_site('www.youtube.com', port)
+    luci.http.prepare_content('application/json')
+    luci.http.write_json(e)
+
+
 end
 
 
