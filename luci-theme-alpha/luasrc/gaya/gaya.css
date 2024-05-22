@@ -852,6 +852,7 @@
 .main>.main-left>.nav>.slide>.menu,
  .main>.main-left>.nav>li>[data-title="退出"],
  .main>.main-left>.nav>li>[data-title="iStore"],
+ .main>.main-left>.nav>li>[data-title="概览"],
 .main>.main-left>.nav>li>[data-title="网络向导"],
 .main>.main-left>.nav>li>[data-title="首页"],
 .main>.main-left>.nav>li>[data-title="NetworkGuide"],
@@ -888,7 +889,7 @@
  	width: 25px;
  	height: 25px;
  	content: "";
- 	background: url(./icon/sidebar-icon/status.svg) no-repeat;
+ 	background: url(./icon/sidebar-icon/status.png) no-repeat;
  	background-size: 25px;
  }
 
@@ -908,7 +909,7 @@
  	width: 25px;
  	height: 25px;
  	content: "";
- 	background: url(./icon/sidebar-icon/services.svg) no-repeat;
+ 	background: url(./icon/sidebar-icon/link.png) no-repeat;
  	background-size: 25px;
  }
 
@@ -938,7 +939,7 @@
  	width: 25px;
  	height: 25px;
  	content: "";
- 	background: url(./icon/sidebar-icon/network.svg) no-repeat;
+ 	background: url(./icon/sidebar-icon/vpn.svg) no-repeat;
  	background-size: 25px;
  }
 
@@ -948,7 +949,7 @@
  	width: 25px;
  	height: 25px;
  	content: "";
- 	background: url(./icon/sidebar-icon/vpn.svg) no-repeat;
+ 	background: url(./icon/sidebar-icon/vpn.png) no-repeat;
  	background-size: 25px;
  }
 
