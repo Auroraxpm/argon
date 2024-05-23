@@ -5,13 +5,14 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=luci-app-alpha-config
-
-LUCI_TITLE:=LuCI for Alpha theme configuration
-LUCI_DESCRIPTION:=Configuration Alpha theme in LuCI.
-
-PKG_MAINTAINER:=Hilman Maulana <hilman0.0maulana@gmail.com>
 PKG_VERSION:=1.4
 PKG_LICENSE:=Apache-2.0
+
+PKG_MAINTAINER:=jerrykuku <jerrykuku@qq.com>
+
+LUCI_TITLE:=LuCI for Alpha theme configuration
+
+
 
 include $(TOPDIR)/feeds/luci/luci.mk
 
