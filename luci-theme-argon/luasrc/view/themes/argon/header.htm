@@ -84,7 +84,7 @@
     <meta name="msapplication-TileColor" content="<%=bar_color%>">
     <meta name="msapplication-TileImage" content="<%=media%>/icon/ms-icon-144x144.png">
     <meta name="theme-color" content="<%=bar_color%>">
-    <link rel="stylesheet" href="<%=media%>/css/cascade.css<%# ?v=PKG_VERSION %>">
+    <link rel="stylesheet" href="<%=media%>/css/cascade.css?v=2.2.10.10">
     <style title="text/css">
         <% if mode == 'normal' then %>
             @media (prefers-color-scheme: dark) {
@@ -105,6 +105,7 @@
         <% end -%>
     </style>
 	<link rel="shortcut icon" href="<%=media%>/favicon.ico">
+<link rel="stylesheet" href="<%=resource%>/easepi/easeicon.css?t=1649313193968">
 	<% if node and node.css then %>
 	<link rel="stylesheet" href="<%=resource%>/<%=node.css%>">
 	<% end -%>
@@ -113,7 +114,7 @@
 		<%=css %>
 	</style>
 	<% end -%>
-	<script src="<%=media%>/js/polyfill.min.js"></script>
+	<script src="<%=media%>/js/polyfill.min.js?v=2.2.10.10"></script>
 	<script src="<%=url('admin/translations', luci.i18n.context.lang)%>?v=<%=ver.luciversion%>"></script>
 	<script src="<%=resource%>/cbi.js?v=<%=ver.luciversion%>"></script>
 	<script src="<%=resource%>/luci.js?v=<%=ver.luciversion%>"></script>
