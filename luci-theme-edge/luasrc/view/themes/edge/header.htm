@@ -58,6 +58,7 @@
 	<link rel="apple-touch-icon-precomposed" href="<%=media%>/logo.png" sizes="144x144">
 	<link rel="stylesheet" href="<%=media%>/cascade.css">
 	<link rel="shortcut icon" href="<%=media%>/favicon.ico">
+       <link rel="stylesheet" href="<%=resource%>/easepi/easeicon.css?t=1649313193968">
 	<% if node and node.css then %>
 	<link rel="stylesheet" href="<%=resource%>/<%=node.css%>">
 	<% end -%>
@@ -98,6 +99,12 @@
 							<i class="sidenav-toggler-line"></i>
 						</div>
 					</div>
+				</div>
+			</div>
+			<div style="display: flex; flex-direction: column;position: relative;align-items: center;">
+				<input id="menu_search" type="text" placeholder="<%:Search Menu%>">
+				<div id="search_result" style="display: none;">
+					<ul class="float-list" style="width: 90%;min-height: 10em;max-height: 20em;"></ul>
 				</div>
 			</div>
 		</div>
