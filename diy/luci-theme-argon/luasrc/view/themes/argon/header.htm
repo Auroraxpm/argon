@@ -520,18 +520,18 @@ body {
                 <a href='/cgi-bin/luci/admin/network/network'><img src="<%=media%>/navbar/interface.gif" width="35" height="35"></a>
             </div>
         </div>
-
-<div class="pure-u-1-2" >
 <% if luci.i18n.context.lang == "zh-cn" then %>
+		<fieldset  class="cbi-section">
+	<div class="pure-g status">
 		<div class="siz">
 			<div class="block pure-g">
 				<div class="pure-u-9-24">
-					<div class="img-con" align="center">
+					<div class="img-con">
 						<img src="/luci-static/ssr/img/loading.svg" id="flag" class="pure-img">
 					</div>
 				</div>
 				<div class="pure-u-10-24">
-					<h4 ><%:GEOLOCATION%><br><br><span id="d-ip" class="green" ><%:Checking...%></span> <span  class="green" id="ipify-ipip"></span></h4>
+					<h4 ><span id="d-ip" class="green"><%:Checking...%></span> <span class="green" id="ipip"></span></h4>
 				</div>
 			</div>
 		</div>
@@ -550,63 +550,57 @@ body {
 					</div>
 				</div>
 				<div class="pure-u-10-24">
-					<h4 ><%:GEOLOCATION%><br><br><span id="d-ip" class="green"><%:Checking...%></span> <span class="green" id="ipip"></span></h4>
+					<h4 ><span id="d-ip" class="green"><%:Checking...%></span> <span class="green" id="ipip"></span></h4>
 				</div>
 			</div>
 		</div>
      </div>
 </fieldset>
 <%end%>
-
 <script type="text/javascript">//<![CDATA[	
-		const _IMG = '/luci-static/ssr/';		
-		<% if luci.i18n.context.lang == "zh-cn" then %>
-			let random = parseInt(Math.random() * 100000000);
-			let IP = {
-						get: (url, type) =>
-							fetch(url, { method: 'GET' }).then((resp) => {
-								if (type === 'text')
-									return Promise.all([resp.ok, resp.status, resp.text(), resp.headers]);
-								else {
-									return Promise.all([resp.ok, resp.status, resp.json(), resp.headers]);
-								}
-						}).then(([ok, status, data, headers]) => {
-								if (ok) {
-									let json = {
-										ok,
-										status,
-										data,
-										headers
+		const _IMG = '/luci-static/ssr/';	
+	
+		<% if luci.i18n.context.lang == "zh-cn" or luci.i18n.context.lang == "auto" then  %>
+					let random = parseInt(Math.random() * 100000000);
+				let IP = {
+							get: (url, type) =>
+								fetch(url, { method: 'GET' }).then((resp) => {
+									if (type === 'text')
+										return Promise.all([resp.ok, resp.status, resp.text(), resp.headers]);
+									else {
+										return Promise.all([resp.ok, resp.status, resp.json(), resp.headers]);
 									}
-									return json;
-								} else {
-									throw new Error(JSON.stringify(json.error));
-								}
-						}).catch(error => {
-								throw error;
-						}),
-						parseIPIpip: (ip, elID) => {
-							IP.get(`https://geoip.gbxcloud.com/?geoip=${ip}`, 'text')
-								.then(resp => {
-									 document.getElementById(elID).innerHTML = resp.data;
-								})
-						},						
-						Ipip: (ip, elID) => {
+							}).then(([ok, status, data, headers]) => {
+									if (ok) {
+										let json = {
+											ok,
+											status,
+											data,
+											headers
+										}
+										return json;
+									} else {
+										throw new Error(JSON.stringify(json.error));
+									}
+							}).catch(error => {
+									throw error;
+							}),
+							Ipip: (ip, elID) => {
 								IP.get(`https://api.ip.sb/geoip/${ip}`, 'json')
 									.then(resp => {
+										 document.getElementById(elID).innerHTML = `${resp.data.country} ${resp.data.isp} ${resp.data.asn_organization}`;
 										 $("#flag").attr("src", _IMG + "flags/" + resp.data.country +".png");
 									})
-						},							
-						getIpipnetIP: () => {
-							IP.get(`https://ip4.seeip.org/json?z=${random}`, 'json')
-								.then((resp) => {
+							},							
+							getIpipnetIP: () => {
+								IP.get(`https://ip4.seeip.org/json?z=${random}`, 'json')
+									.then((resp) => {
 										let data = `${resp.data.ip}`;
-										document.getElementById('d-ip').innerHTML = `${data} `
+										document.getElementById('d-ip').innerHTML = `${data}`
 										return `${data}`
-								})
-								.then(ip => {
-									IP. parseIPIpip(ip, 'ipify-ipip');
-									IP.Ipip(ip, 'ipip');
+									})
+									.then(ip => {
+										IP.Ipip(ip, 'ipip');
 								})
 						},							
 			}
