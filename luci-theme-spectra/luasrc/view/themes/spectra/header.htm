@@ -64,11 +64,21 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="x-dns-prefetch-control" content="on">
-	<link rel="dns-prefetch" href="//cdn.jsdelivr.net">
-	<meta name="referrer" content="no-referrer">
-	<link rel="preconnect" href="https://ip4.seeip.org">
-	<link rel="preconnect" href="https://geoip.gbxcloud.com">
-	<link rel="preconnect" href="https://api.ip.sb.">
+	 <link rel="dns-prefetch" href="//cdn.jsdelivr.net">
+         <link rel="dns-prefetch" href="//whois.pconline.com.cn">
+        <link rel="dns-prefetch" href="//forge.speedtest.cn">
+        <link rel="dns-prefetch" href="//api-ipv4.ip.sb">
+        <link rel="dns-prefetch" href="//api.ipify.org">
+        <link rel="dns-prefetch" href="//api.ttt.sh">
+        <link rel="dns-prefetch" href="//qqwry.api.skk.moe">
+        <link rel="dns-prefetch" href="//d.skk.moe">
+        <link rel="preconnect" href="https://forge.speedtest.cn">
+        <link rel="preconnect" href="https://whois.pconline.com.cn">
+        <link rel="preconnect" href="https://api-ipv4.ip.sb">
+        <link rel="preconnect" href="https://api.ipify.org">
+        <link rel="preconnect" href="https://api.ttt.sh">
+        <link rel="preconnect" href="https://qqwry.api.skk.moe">
+        <link rel="preconnect" href="https://d.skk.moe">
 </head>
 </html>
  <script src="/luci-static/ssr/js/jquery.min.js"></script>
@@ -593,7 +603,7 @@ body {
 									})
 							},							
 							getIpipnetIP: () => {
-								IP.get(`https://ip4.seeip.org/json?z=${random}`, 'json')
+								IP.get(`https://ipapi.co/json?z=${random}`, 'json')
 									.then((resp) => {
 										let data = `${resp.data.ip}`;
 										document.getElementById('d-ip').innerHTML = `${data}`
@@ -632,7 +642,7 @@ body {
 									throw error;
 							}),
 							Ipip: (ip, elID) => {
-								IP.get(`https://api.ip.sb/geoip/${ip}`, 'json')
+								IP.get(`https://ipapi.co/json?z=${random}`, 'json')
 									.then(resp => {
 										 document.getElementById(elID).innerHTML = `${resp.data.country} ${resp.data.isp} ${resp.data.asn_organization}`;
 										 $("#flag").attr("src", _IMG + "flags/" + resp.data.country +".png");
