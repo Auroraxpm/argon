@@ -332,6 +332,7 @@
 	  text-decoration: none;
 	  cursor: pointer;
 	}
+
 </style>
 
 	<meta charset="utf-8">
@@ -530,141 +531,148 @@ body {
                 <a href='/cgi-bin/luci/admin/network/network'><img src="<%=media%>/navbar/interface.gif" width="35" height="35"></a>
             </div>
         </div>
-<% if luci.i18n.context.lang == "zh-cn" then %>
-		<fieldset  class="cbi-section">
-	<div class="pure-g status">
-		<div class="siz">
-			<div class="block pure-g">
-				<div class="pure-u-9-24">
-					<div class="img-con">
-						<img src="/luci-static/ssr/img/loading.svg" id="flag" class="pure-img">
-					</div>
-				</div>
-				<div class="pure-u-10-24">
-					<h4 ><span id="d-ip" class="green"><%:Checking...%></span> <span class="green" id="ipip"></span></h4>
-				</div>
-			</div>
-		</div>
-      </div>
-</fieldset>
-<%end%>
+<% if luci.i18n.context.lang == "zh-cn" or luci.i18n.context.lang == "en" or luci.i18n.context.lang == "auto" then %>
+    <fieldset class="cbi-section">
+        <div class="pure-g status">
+            <div class="siz">
+                <div class="block pure-g">
+                    <div class="pure-u-9-24">
+                        <div class="img-con">
+                            <img src="/luci-static/ssr/img/loading.svg" id="flag" class="pure-img">
+                        </div>
+                    </div>
+                    <div class="pure-u-10-24">
+                        <h4><span id="d-ip" class="green"><%:Checking...%></span> <span class="green" id="ipip"></span></h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+<% end %>
 
-<% if luci.i18n.context.lang == "en" or luci.i18n.context.lang == "auto" then %>
-<fieldset  class="cbi-section">
-	<div class="pure-g status">
-		<div class="siz">
-			<div class="block pure-g">
-				<div class="pure-u-9-24">
-					<div class="img-con">
-						<img src="/luci-static/ssr/img/loading.svg" id="flag" class="pure-img">
-					</div>
-				</div>
-				<div class="pure-u-10-24">
-					<h4 ><span id="d-ip" class="green"><%:Checking...%></span> <span class="green" id="ipip"></span></h4>
-				</div>
-			</div>
-		</div>
-     </div>
-</fieldset>
-<%end%>
-<script type="text/javascript">//<![CDATA[	
-		const _IMG = '/luci-static/ssr/';	
-	
-		<% if luci.i18n.context.lang == "zh-cn" or luci.i18n.context.lang == "auto" then  %>
-					let random = parseInt(Math.random() * 100000000);
-				let IP = {
-							get: (url, type) =>
-								fetch(url, { method: 'GET' }).then((resp) => {
-									if (type === 'text')
-										return Promise.all([resp.ok, resp.status, resp.text(), resp.headers]);
-									else {
-										return Promise.all([resp.ok, resp.status, resp.json(), resp.headers]);
-									}
-							}).then(([ok, status, data, headers]) => {
-									if (ok) {
-										let json = {
-											ok,
-											status,
-											data,
-											headers
-										}
-										return json;
-									} else {
-										throw new Error(JSON.stringify(json.error));
-									}
-							}).catch(error => {
-									throw error;
-							}),
-							Ipip: (ip, elID) => {
-								IP.get(`https://api.ip.sb/geoip/${ip}`, 'json')
-									.then(resp => {
-										 document.getElementById(elID).innerHTML = `${resp.data.country} ${resp.data.isp} ${resp.data.asn_organization}`;
-										 $("#flag").attr("src", _IMG + "flags/" + resp.data.country +".png");
-									})
-							},							
-							getIpipnetIP: () => {
-								IP.get(`https://ipapi.co/json?z=${random}`, 'json')
-									.then((resp) => {
-										let data = `${resp.data.ip}`;
-										document.getElementById('d-ip').innerHTML = `${data}`
-										return `${data}`
-									})
-									.then(ip => {
-										IP.Ipip(ip, 'ipip');
-								})
-						},							
-			}
-		<%end%>
+<script type="text/javascript">
+    const _IMG = '/luci-static/ssr/';
+    const translate = {
+        'United States': '美国',
+        'China': '中国',
+        'ISP': '互联网服务提供商',
+        'Japan': '日本',
+        'South Korea': '韩国',
+        'Germany': '德国',
+        'France': '法国',
+        'United Kingdom': '英国',
+        'Canada': '加拿大',
+        'Australia': '澳大利亚',
+        'Russia': '俄罗斯',
+        'India': '印度',
+        'Brazil': '巴西',
+        'Netherlands': '荷兰',
+        'Singapore': '新加坡',
+        'Hong Kong': '香港',
+        'Taiwan': '台湾',
+        'Saudi Arabia': '沙特阿拉伯',
+        'Turkey': '土耳其',
+        'Italy': '意大利',
+        'Spain': '西班牙',
+        'Thailand': '泰国',
+        'Malaysia': '马来西亚',
+        'Indonesia': '印度尼西亚',
+        'South Africa': '南非',
+        'Mexico': '墨西哥',
+        'Israel': '以色列',
+        'Sweden': '瑞典',
+        'Switzerland': '瑞士',
+        'Norway': '挪威',
+        'Denmark': '丹麦',
+        'Belgium': '比利时',
+        'Finland': '芬兰',
+        'Poland': '波兰',
+        'Austria': '奥地利',
+        'Greece': '希腊',
+        'Portugal': '葡萄牙',
+        'Ireland': '爱尔兰',
+        'New Zealand': '新西兰',
+        'Argentina': '阿根廷',
+        'Chile': '智利',
+        'Colombia': '哥伦比亚',
+        'Philippines': '菲律宾',
+        'Vietnam': '越南',
+        'Pakistan': '巴基斯坦',
+        'Egypt': '埃及',
+        'Nigeria': '尼日利亚',
+        'Kenya': '肯尼亚',
+        'Morocco': '摩洛哥',
+        'Google': '谷歌',
+        'Amazon': '亚马逊',
+        'Microsoft': '微软',
+        'Facebook': '脸书',
+        'Apple': '苹果',
+        'IBM': 'IBM',
+        'Alibaba': '阿里巴巴',
+        'Tencent': '腾讯',
+        'Baidu': '百度',
+        'Verizon': '威瑞森',
+        'AT&T': '美国电话电报公司',
+        'T-Mobile': 'T-移动',
+        'Vodafone': '沃达丰',
+        'China Telecom': '中国电信',
+        'China Unicom': '中国联通',
+        'China Mobile': '中国移动',      
+      
+    };  
 
-		<% if luci.i18n.context.lang == "en" or luci.i18n.context.lang == "auto" then %>
-				let random = parseInt(Math.random() * 100000000);
-				let IP = {
-							get: (url, type) =>
-								fetch(url, { method: 'GET' }).then((resp) => {
-									if (type === 'text')
-										return Promise.all([resp.ok, resp.status, resp.text(), resp.headers]);
-									else {
-										return Promise.all([resp.ok, resp.status, resp.json(), resp.headers]);
-									}
-							}).then(([ok, status, data, headers]) => {
-									if (ok) {
-										let json = {
-											ok,
-											status,
-											data,
-											headers
-										}
-										return json;
-									} else {
-										throw new Error(JSON.stringify(json.error));
-									}
-							}).catch(error => {
-									throw error;
-							}),
-							Ipip: (ip, elID) => {
-								IP.get(`https://ipapi.co/json?z=${random}`, 'json')
-									.then(resp => {
-										 document.getElementById(elID).innerHTML = `${resp.data.country} ${resp.data.isp} ${resp.data.asn_organization}`;
-										 $("#flag").attr("src", _IMG + "flags/" + resp.data.country +".png");
-									})
-							},							
-							getIpipnetIP: () => {
-								IP.get(`https://ip4.seeip.org/json?z=${random}`, 'json')
-									.then((resp) => {
-										let data = `${resp.data.ip}`;
-										document.getElementById('d-ip').innerHTML = `${data}`
-										return `${data}`
-									})
-									.then(ip => {
-										IP.Ipip(ip, 'ipip');
-									})
-							}	   
-				       }
-	                <%end%>
-	 IP.getIpipnetIP();	
-//]]></script>
+    let random = parseInt(Math.random() * 100000000);
+    let IP = {
+        get: (url, type) =>
+            fetch(url, { method: 'GET' }).then((resp) => {
+                if (type === 'text')
+                    return Promise.all([resp.ok, resp.status, resp.text(), resp.headers]);
+                else {
+                    return Promise.all([resp.ok, resp.status, resp.json(), resp.headers]);
+                }
+            }).then(([ok, status, data, headers]) => {
+                if (ok) {
+                    let json = {
+                        ok,
+                        status,
+                        data,
+                        headers
+                    }
+                    return json;
+                } else {
+                    throw new Error(JSON.stringify(json.error));
+                }
+            }).catch(error => {
+                throw error;
+            }),
+        Ipip: (ip, elID) => {
+            IP.get(`https://api.ip.sb/geoip/${ip}`, 'json')
+                .then(resp => {
+                    const country = translate[resp.data.country] || resp.data.country;
+                    const isp = translate[resp.data.isp] || resp.data.isp;
+                    const asnOrganization = translate[resp.data.asn_organization] || resp.data.asn_organization;
 
-</style>
+                    document.getElementById(elID).innerHTML = `${country} ${isp} ${asnOrganization}`;
+                    $("#flag").attr("src", _IMG + "flags/" + resp.data.country + ".png");
+                    document.getElementById(elID).style.color = '#FF00FF';
+                })
+        },
+        getIpipnetIP: () => {
+            IP.get(`https://ipapi.co/json?z=${random}`, 'json')
+                .then((resp) => {
+                    let data = `${resp.data.ip}`;
+                    document.getElementById('d-ip').innerHTML = `${data}`;
+                    return `${data}`;
+                })
+                .then(ip => {
+                    IP.Ipip(ip, 'ipip');
+                })
+        }
+    }
+    setInterval(IP.getIpipnetIP, 5000); 
+</script>
+
+
 
 <script>
 function updatemenu(){1==document.getElementById("responsive-menu").checked?(document.getElementById("menu").style.borderBottomRightRadius="0",document.getElementById("menu").style.borderBottomLeftRadius="0"):document.getElementById("menu").style.borderRadius="0px"}
