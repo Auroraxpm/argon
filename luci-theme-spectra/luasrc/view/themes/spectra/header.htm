@@ -132,9 +132,7 @@
         }
        
 </style>
-    
-
-
+   
 	<meta charset="utf-8">
 	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
 	<meta name="format-detection" content="telephone=no, email=no" />
@@ -360,13 +358,20 @@ body {
     display: flex;
     align-items: center;     
     justify-content: center; 
- margin-left: 20px; 
-transform: translateY(20px); 
+    margin-left: 20px; 
+    transform: translateY(20px); 
 
 }
 
+#d-ip, #ipip {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 .pure-img {
-    width: 50px;  
+    width: 60px;  
     height: auto;  
 }
 
@@ -374,7 +379,10 @@ transform: translateY(20px);
     display: flex;
     flex-direction: column;  
     justify-content: center; 
-    gap: 0;   
+    align-items: center;
+    gap: 0;
+    margin-left: 50px;    
+    line-height: 1.5; 
 }
 
 .green {
@@ -385,6 +393,7 @@ transform: translateY(20px);
 #ipip {
     font-size: 14px;
     color: #666;      
+    text-align: center;
 }
 
 h4 {
@@ -604,6 +613,13 @@ h4 {
 
     let cachedIP = null;
     let cachedInfo = null;
+
+    async function updateIP() {
+        await IP.getIpipnetIP();
+        document.getElementById('d-ip').style.display = 'none';
+        document.getElementById('d-ip').offsetHeight; 
+        document.getElementById('d-ip').style.display = 'flex';
+    }
 
     async function onlineTranslate(text, targetLang = 'zh') {
         if (!text || typeof text !== 'string' || text.trim() === '') {
