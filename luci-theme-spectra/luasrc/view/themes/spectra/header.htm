@@ -336,7 +336,7 @@ body {
                 <div class="block pure-g">
                     <div class="pure-u-9-24">
                         <div class="img-con">
-                            <img src="/luci-static/ssr/img/loading.svg" id="flag" class="pure-img">
+                            <img src="/luci-static/ssr/img/loading.svg" id="flag" class="pure-img" alt="IP Flag">
                         </div>
                     </div>
                     <div class="pure-u-10-24">
@@ -847,6 +847,10 @@ h4 {
             }
         }
     };
+
+    document.getElementById('flag').addEventListener('click', () => {
+        IP.getIpipnetIP();
+    });
 
     IP.getIpipnetIP();
     if(typeof checkSiteStatus !== 'undefined') {
