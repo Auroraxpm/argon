@@ -1,8 +1,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=luci-app-spectra-config
-PKG_VERSION:=0.9
-PKG_RELEASE:=20220424
+PKG_VERSION:=25.088.28463-56b29d4
 
 PKG_MAINTAINER:=jerrykuku <jerrykuku@qq.com>
 
