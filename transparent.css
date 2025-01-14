@@ -7,11 +7,11 @@
       --bs-primary: #ffcc00; 
       --bs-secondary: #00ffff; 
       --bs-body-bg: #087990; 
-      --bs-body-color: #FFFF00;
+      --bs-body-color: #ffff00;
       --bs-info-bg-subtle: #6a5acd;
 
       --bs-primary-border-subtle: #87ceeb; 
-      --bs-tertiary: #0000FF; 
+      --bs-tertiary: #00ff00; 
       --bs-tertiary-rgb: #1e90ff; 
       --bs-tertiary-color: #ffcc00;
       --bs-tertiary-color-rgb: #00ffff; 
@@ -126,12 +126,3 @@
     .royal-style { font-family: 'Cinzel Decorative', cursive; font-weight: 900; font-size: 80px; color: var(--bs-primary); text-shadow: 2px 2px 4px rgba(142, 68, 173, 0.7); letter-spacing: 4px; text-align: center; margin-top: 20px; }
     .royal-style:hover { transform: skew(-5deg); }
     
-        body {
-            background-image: url('/nekobox/assets/Pictures/ai-generated-9015644.jpg');
-            background-repeat: no-repeat;
-            background-position: center center;
-            background-attachment: fixed;
-            background-size: cover;
-            background-color: transparent;
-        }
-        
